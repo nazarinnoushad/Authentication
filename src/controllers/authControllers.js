@@ -4,7 +4,7 @@ import config from "../config/config.js"
 
 
 export const cookieOptions = {
-expires : new Date(Date.now()+3*24*60*60*1000),
+expires : new Date(Date.now()+30*24*60*60*1000),
 httpOnly: true
 }
 /*
@@ -72,7 +72,7 @@ user.password = undefined // for password safety
 
 
 /*
-*LogIn
+*LogIn  
 *route:http://localhost:4000/api/v1/auth/login
 *discription:user login controller to login 
 */
@@ -84,9 +84,12 @@ export  const login=async (req,res)=>{
 
         //validation
 
-            if(!email || !password){
-                return res.status(400).json
-            }
+        if(!email || !password){
+        return res.status(400).json({
+        success:false,
+        message:"invalid email  or password"
+    })
+}
         //check if the user exist in database
 
             const user= await User.findOne({email}).select("+password")
@@ -153,6 +156,7 @@ export  const login=async (req,res)=>{
            })
         
     }catch(error){
+
         res.status(500).json({
             success:false,
             message:'error in login ${error}',

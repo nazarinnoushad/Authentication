@@ -52,10 +52,7 @@ const Navbar = () => {
       <ul className="hidden md:flex items-center space-x-8 text-white font-medium">
         <li><Link to="/" className="hover:text-yellow-100 transition">Home</Link></li>
         {auth?.user && (
-          <>
-            <li><Link to="/collection" className="hover:text-yellow-100 transition">Collection</Link></li>
-            <li><Link to="/profile" className="text-red-100 transition">{auth.user.name}</Link></li>
-          </>
+          <li><Link to="/profile" className="text-red-100 transition">{auth.user.name}</Link></li>
         )}
       </ul>
 
@@ -86,10 +83,7 @@ const Navbar = () => {
         <div className="absolute top-20 left-0 w-full bg-gradient-to-r from-pink-500 via-orange-400 to-yellow-300 text-white font-medium flex flex-col items-center space-y-4 py-4 z-50 md:hidden">
           <Link to="/" onClick={toggleMenu}>Home</Link>
           {auth?.user && (
-            <>
-              <Link to="/collection" onClick={toggleMenu}>Collection</Link>
-              <Link to="/profile" onClick={toggleMenu}>{auth.user.name}</Link>
-            </>
+            <Link to="/profile" onClick={toggleMenu}>{auth.user.name}</Link>
           )}
           {!auth?.user ? (
             <>

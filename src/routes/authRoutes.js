@@ -1,6 +1,6 @@
 import express from 'express'
 import { login,logout,signUP,testController } from '../controllers/authControllers.js'
-import { isAdmin,isLoggedIn } from '../middlewares/autthMiddlewares.js'
+import { isAdmin,isLoggedIn } from '../middlewares/authMiddlewares.js'
 const router = express.Router()
 //Routing
 //signUP ||method :Post

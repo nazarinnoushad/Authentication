@@ -1,37 +1,37 @@
-import React, { useState, useContext } from 'react'
-import { Helmet } from 'react-helmet'
-import axios from 'axios'
-import { toast } from 'sonner'
-import { useNavigate } from 'react-router-dom'
-import AuthContext from '../context/AuthContext'
+import React, { useState, useContext } from 'react';
+import { Helmet } from 'react-helmet';
+import axios from 'axios';
+import { toast } from 'sonner';
+import { useNavigate, Link } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
 
 const Login = () => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const navigate = useNavigate()
-  const { auth, setAuth } = useContext(AuthContext)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const { auth, setAuth } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:4000/api/v1/auth/login", { email, password })
+      const { data } = await axios.post("http://localhost:4000/api/v1/auth/login", { email, password });
       if (data.success) {
-        toast.success(data.message)
+        toast.success(data.message);
         setAuth({
           ...auth,
           user: data.user,
           token: data.token
-        })
-        localStorage.setItem("auth", JSON.stringify(data))
-        navigate("/")
+        });
+        localStorage.setItem("auth", JSON.stringify(data));
+        navigate("/");
       } else {
-        toast.error(data.message)
+        toast.error(data.message);
       }
     } catch (error) {
-      console.log(error)
-      toast.error("Login failed. Please try again.")
+      console.log(error);
+      toast.error("Login failed. Please try again.");
     }
-  }
+  };
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-black">
@@ -46,7 +46,7 @@ const Login = () => {
           backgroundImage:
             "url('https://plus.unsplash.com/premium_photo-1672883551961-dd625e47990a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
         }}
-      ></div>
+      />
 
       {/* Foreground Content */}
       <div className="relative z-10 max-w-md w-full p-6 bg-black/10 backdrop-blur-md rounded-xl shadow-xl border border-white/20">
@@ -60,7 +60,6 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-black"
-              placeholder="you@example.com"
               required
             />
           </div>
@@ -72,7 +71,6 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-black"
-              placeholder="••••••••"
               required
             />
           </div>
@@ -86,12 +84,16 @@ const Login = () => {
         </form>
 
         <p className="text-sm text-center mt-4 text-white">
-          Don't have an account? <a href="#" className="text-pink-400 hover:underline">Sign up</a>
+          Don't have an account?{' '}
+          <Link to="/signup" className="text-pink-400 hover:underline">
+            Sign up
+          </Link>
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
+
 

@@ -1,7 +1,7 @@
 import JWT from "jsonwebtoken"
 import config from "../config/config.js"
 import User from "../models/userSchema.js"
-import AuthRoles from "../utils/AuthRoles.js"
+import AuthRoles from "../utils/authRoles.js"
 
 
 //checking is logged in 
